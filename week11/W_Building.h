@@ -37,6 +37,7 @@ namespace wolf
         Building();
         // Draw the cube in the screen
         void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix);
+        void Build (wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position);
 		void SetPosition(const glm::vec3& position);
         glm::mat4 GetPosition();
         

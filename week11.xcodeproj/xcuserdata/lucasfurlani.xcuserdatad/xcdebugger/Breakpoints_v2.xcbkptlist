@@ -303,5 +303,83 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "week11/assignment2.cpp"
+            timestampString = "406596177.630692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "779"
+            endingLineNumber = "779"
+            landmarkName = "RenderAssignment2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "week11/W_Building.cpp"
+            timestampString = "406595880.322983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3&amp; _position)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "week11/W_Building.cpp"
+            timestampString = "406595880.322983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3&amp; _position)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wolf::Building::Build(wolf::Program*, glm::detail::tmat4x4&lt;float&gt;*, glm::detail::tmat4x4&lt;float&gt;*, glm::detail::tmat4x4&lt;float&gt;, glm::detail::tvec3&lt;float&gt; const&amp;)"
+                  moduleName = "week11"
+                  urlString = "file:///Users/lucasfurlani/Dropbox/UPEI/Fall/CS%20435%20-%20Computer%20Graphics/Week9Samples/week11/week11/W_Building.cpp"
+                  timestampString = "406595555.931123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wolf::Building::Build(wolf::Program*, glm::detail::tmat4x4&lt;float&gt;*, glm::detail::tmat4x4&lt;float&gt;*, glm::detail::tmat4x4&lt;float&gt;, glm::detail::tvec3&lt;float&gt; const&amp;)"
+                  moduleName = "week11"
+                  urlString = "file:///Users/lucasfurlani/Dropbox/UPEI/Fall/CS%20435%20-%20Computer%20Graphics/Week9Samples/week11/week11/W_Building.cpp"
+                  timestampString = "406595555.931369"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "260">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

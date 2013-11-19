@@ -29,7 +29,7 @@
 int numberOfBlockLines   = 11;
 int numberOfBlockColumns = 11;
 int numberOfTextures     = 8;
-int numberOfFloors       = 15;
+int numberOfFloors       = 8;
 
 struct blockType {
     short numberOfBuildings;
@@ -635,7 +635,9 @@ void InitAssignment2()
 
 void RenderAssignment2()
 {
-    
+    //if( glfwGetKey( 'R' ) == GLFW_PRESS ) {
+        
+    //}
     //------
     // Reset the matrix
     //glMatrixMode(GL_MODELVIEW);
@@ -765,10 +767,21 @@ void RenderAssignment2()
     //short iteratorCount = 0;
     std::list<buildingInformation>::iterator buildingsInformationIterator;
     // Iterate through the buildings list
+    
     for (buildingsInformationIterator = buildingsInformation.begin() ; buildingsInformationIterator != buildingsInformation.end(); buildingsInformationIterator++){
-        building->SetPosition(glm::vec3((*buildingsInformationIterator).positionX, 0.0f, (*buildingsInformationIterator).positionZ));
+        //building->SetPosition(glm::vec3((*buildingsInformationIterator).positionX, 0.0f, (*buildingsInformationIterator).positionZ));
         building->SetTexture((*buildingsInformationIterator).texture);
-        building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+        building->SetType((*buildingsInformationIterator).type);
+        building->SetNumberOfFloors((*buildingsInformationIterator).numberOfFloors);
+        //building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+        float x_position = (*buildingsInformationIterator).positionX;
+        float z_position = (*buildingsInformationIterator).positionZ;
+        building->Build(program,
+                        &projectionMatrix,
+                        &viewMatrix,
+                        worldMatrix,
+                        glm::vec3(x_position, 0.0f, z_position));
+        
         /*
         //        (*buildingsInformationIterator).
         printf("Building: %hd:\n", iteratorCount);

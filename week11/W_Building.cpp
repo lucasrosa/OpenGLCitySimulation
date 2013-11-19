@@ -144,6 +144,26 @@ namespace wolf {
         type = _type;
     }
     
+    void Building::SetNumberOfFloors(short _numberOfFloors){
+        numberOfFloors = _numberOfFloors;
+    }
+    
+    void Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position)
+    {
+    switch (type) {
+        case 0:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
+            
+        default:
+            this->SetPosition(glm::vec3(_position.x, 0.0f, _position.z));
+            this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            break;
+    }
+    }
     void Building::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix)
     {
         projectionMatrix = _projectionMatrix;
@@ -164,9 +184,6 @@ namespace wolf {
         program->SetUniform("texture1", 0);
         // Set up source data
         vertexDeclaration->Bind();
-        
-        
-        
         
         // Draw!
         glDrawArrays(GL_TRIANGLES, 0, 4 * 3 * 2);
