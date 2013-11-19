@@ -33,7 +33,7 @@ int numberOfFloors       = 15;
 
 struct blockType {
     short numberOfBuildings;
-    short *buildingTypes;
+    short buildingTypes[4];
 };
 
 struct buildingInformation {
@@ -44,7 +44,7 @@ struct buildingInformation {
     float positionZ;
 };
 
-struct blockType blockTypes[12];
+static struct blockType blockTypes[12];
 
 void initCityPlan() {
     // Types:
@@ -57,17 +57,15 @@ void initCityPlan() {
     // 6: Triple sized (L shaped) Building (rotated 270 degrees)
     // 7: Quadruple sized Building : 7
     
-    short blockNumber = 0;
+    int blockNumber = 0;
     //--------- Block type 0 ----------> Simple block, 4 buildings of normal size
     // Visual representation:   1 2
     //                          3 4
     blockTypes[blockNumber].numberOfBuildings = 4;
-    short buildingTypesForBlock0[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock0[0] = 0;
-    buildingTypesForBlock0[1] = 0;
-    buildingTypesForBlock0[2] = 0;
-    buildingTypesForBlock0[3] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock0;
+    blockTypes[blockNumber].buildingTypes[0] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = 0;
+    blockTypes[blockNumber].buildingTypes[3] = 0;
     blockNumber++;
     
     //--------- Block type 1 ----------> 3 buildings: 2 of normal size and one of double size, double size on the south
@@ -75,113 +73,92 @@ void initCityPlan() {
     //                          3 3
     blockTypes[blockNumber].numberOfBuildings = 3;
     short buildingTypesForBlock1[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock1[0] = 0;
-    buildingTypesForBlock1[1] = 0;
-    buildingTypesForBlock1[2] = 2;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock1;
+    blockTypes[blockNumber].buildingTypes[0] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = 2;
     blockNumber++;
     
     //--------- Block type 2 ----------> 3 buildings: 2 of normal size and one of double size, double size on the north
     // Visual representation:   1 1
     //                          2 3
     blockTypes[blockNumber].numberOfBuildings = 3;
-    short buildingTypesForBlock2[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock2[0] = 2;
-    buildingTypesForBlock2[1] = 0;
-    buildingTypesForBlock2[2] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock2;
+    blockTypes[blockNumber].buildingTypes[0] = 2;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = 0;
     blockNumber++;
     
     //--------- Block type 3 ----------> 3 buildings: 2 of normal size and one of double size, double size on the right
     // Visual representation:   1 2
     //                          3 2
     blockTypes[blockNumber].numberOfBuildings = 3;
-    short buildingTypesForBlock3[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock3[0] = 0;
-    buildingTypesForBlock3[1] = 1;
-    buildingTypesForBlock3[2] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock3;
+    blockTypes[blockNumber].buildingTypes[0] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = 1;
+    blockTypes[blockNumber].buildingTypes[2] = 0;
     blockNumber++;
     
     //--------- Block type 4 ----------> 3 buildings: 2 of normal size and one of double size, double size on the left
     // Visual representation:   1 2
     //                          1 3
     blockTypes[blockNumber].numberOfBuildings = 3;
-    short buildingTypesForBlock4[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock4[0] = 1;
-    buildingTypesForBlock4[1] = 0;
-    buildingTypesForBlock4[2] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock4;
+    blockTypes[blockNumber].buildingTypes[0] = 1;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = 0;
+
     blockNumber++;
     
     //--------- Block type 5 ----------> 2 buildings: 2 double size vertically positioned
     // Visual representation:   1 2
     //                          1 2
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock5[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock5[0] = 1;
-    buildingTypesForBlock5[1] = 1;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock5;
+    blockTypes[blockNumber].buildingTypes[0] = 1;
+    blockTypes[blockNumber].buildingTypes[1] = 1;
     blockNumber++;
     
     //--------- Block type 6 ----------> 2 buildings: 2 double size horizontally positioned
     // Visual representation:   1 1
     //                          2 2
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock6[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock6[0] = 2;
-    buildingTypesForBlock6[1] = 2;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock6;
+    blockTypes[blockNumber].buildingTypes[0] = 2;
+    blockTypes[blockNumber].buildingTypes[1] = 2;
     blockNumber++;
     
     //--------- Block type 7 ----------> 2 buildings: 1 of triple size rotated 180 degrees and 1 of normal size
     // Visual representation:   1 1
     //                          2 1
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock7[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock7[0] = 5;
-    buildingTypesForBlock7[1] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock7;
+    blockTypes[blockNumber].buildingTypes[0] = 5;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
     blockNumber++;
     
     //--------- Block type 8 ----------> 2 buildings: 1 of normal size and one of triple size rotated 270 degrees
     // Visual representation:   1 2
     //                          2 2
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock8[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock8[0] = 0;
-    buildingTypesForBlock8[1] = 6;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock8;
+    blockTypes[blockNumber].buildingTypes[0] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = 6;
     blockNumber++;
     
     //--------- Block type 9 ----------> 2 buildings: 1 of triple size and one of normal size
     // Visual representation:   1 2
     //                          1 1
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock9[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock9[0] = 3;
-    buildingTypesForBlock9[1] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock9;
+    blockTypes[blockNumber].buildingTypes[0] = 3;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
     blockNumber++;
     
     //--------- Block type 10 ----------> 2 buildings: 1 of triple size rotated 90 degrees and one of normal size
     // Visual representation:   1 1
     //                          1 2
     blockTypes[blockNumber].numberOfBuildings = 2;
-    short buildingTypesForBlock10[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock10[0] = 5;
-    buildingTypesForBlock10[1] = 0;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock10;
+    blockTypes[blockNumber].buildingTypes[0] = 5;
+    blockTypes[blockNumber].buildingTypes[1] = 0;
     blockNumber++;
     
     //--------- Block type 11 ----------> 1 building of quadruple size
     // Visual representation:   1 1
     //                          1 1
     blockTypes[blockNumber].numberOfBuildings = 1;
-    short buildingTypesForBlock11[blockTypes[blockNumber].numberOfBuildings];
-    buildingTypesForBlock11[0] = 7;
-    blockTypes[blockNumber].buildingTypes = buildingTypesForBlock11;
-    blockNumber++;
+    blockTypes[blockNumber].buildingTypes[0] = 7;
 }
 
 void generateCityPlan() {
@@ -192,9 +169,18 @@ void generateCityPlan() {
     // initialize random seed
     srand ((int) time(NULL));
     
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < blockTypes[i].numberOfBuildings; j++) {
+            printf("blockTypes[%d].buildingTypes[%d] = %hd\n", i, j, blockTypes[i].buildingTypes[j]);
+        }
+    }
+    
+    printf("\n\n\n\n\n");
+
+    
     int randomBlock;
-    for (int line = 0; line <= numberOfBlockLines; line++) {
-        for (int column = 0; column <= numberOfBlockColumns; column++) {
+    for (int line = 0, blockLinePosition = 0; line <= numberOfBlockLines; line++, blockLinePosition += 3) {
+        for (int column = 0, blockColumnPosition = 0; column <= numberOfBlockColumns; column++, blockColumnPosition += 3) {
             randomBlock = rand() % 12;
             for (int building = 0; building < blockTypes[randomBlock].numberOfBuildings; building++) {
                 // Randomically generate building information
@@ -206,10 +192,24 @@ void generateCityPlan() {
                 struct buildingInformation thisBuilding;
                 thisBuilding.numberOfFloors = randomNumberOfFloors;
                 thisBuilding.texture        = randomTexture;
-                thisBuilding.positionX      = line;
-                thisBuilding.positionZ      = column;
                 thisBuilding.type           = blockTypes[randomBlock].buildingTypes[building];
+                printf("blockTypes[%d].buildingTypes[%d] = %hd\n", randomBlock, building, blockTypes[randomBlock].buildingTypes[building]);
+                //-----------
+                // Calculate the exact position of the building in the block
+                //-----------
+                thisBuilding.positionX      = blockLinePosition;
+                thisBuilding.positionZ      = blockColumnPosition;
                 
+                switch (thisBuilding.type) {
+                    case 0:
+                        if (building) {
+                            //<#statements#>
+                        }
+                        break;
+                        
+                    default:
+                        break;
+                }
                 //BuildBuilding(blockPosition, blockTypes[randomBlock].buildingTypes[building], positionInsideBlock = building, randomNumberOfFloors,randomTexture)
                 
                 buildingsInformation.push_back(thisBuilding);
