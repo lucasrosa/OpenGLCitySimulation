@@ -75,7 +75,7 @@ namespace wolf {
     {
         
         
-        vertexBuffer = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(Vertex) * 4 * 3 * 2);
+        vertexBuffer = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(Vertex) * 6 * 3 * 2);
         
         vertexDeclaration = new wolf::VertexDeclaration();
         vertexDeclaration->Begin();
@@ -151,13 +151,72 @@ namespace wolf {
     void Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position)
     {
     switch (type) {
+        case 6:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x-1.0f, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
         case 0:
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x, i, _position.z));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
+            //break; // Everybody has this
+        case 1:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z + 1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
             break;
-            
+        case 2:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
+        case 3:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
+        case 4:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
+        case 5:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x+1.0, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
+        case 7:
+            for (float i = 0; i < numberOfFloors; i++) {
+                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                
+                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z+1.0f));
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            }
+            break;
         default:
             this->SetPosition(glm::vec3(_position.x, 0.0f, _position.z));
             this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
@@ -186,6 +245,6 @@ namespace wolf {
         vertexDeclaration->Bind();
         
         // Draw!
-        glDrawArrays(GL_TRIANGLES, 0, 4 * 3 * 2);
+        glDrawArrays(GL_TRIANGLES, 0, 6 * 3 * 2);
     }
 }
