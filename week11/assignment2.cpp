@@ -46,6 +46,9 @@ struct buildingInformation {
 
 static struct blockType blockTypes[12];
 
+// Define the buildings information list
+static std::list<buildingInformation> buildingsInformation;
+
 void initCityPlan() {
     // Types:
     // 0: Normal sized Building
@@ -72,7 +75,6 @@ void initCityPlan() {
     // Visual representation:   1 2
     //                          3 3
     blockTypes[blockNumber].numberOfBuildings = 3;
-    short buildingTypesForBlock1[blockTypes[blockNumber].numberOfBuildings];
     blockTypes[blockNumber].buildingTypes[0] = 0;
     blockTypes[blockNumber].buildingTypes[1] = 0;
     blockTypes[blockNumber].buildingTypes[2] = 2;
@@ -150,7 +152,7 @@ void initCityPlan() {
     // Visual representation:   1 1
     //                          1 2
     blockTypes[blockNumber].numberOfBuildings = 2;
-    blockTypes[blockNumber].buildingTypes[0] = 5;
+    blockTypes[blockNumber].buildingTypes[0] = 4;
     blockTypes[blockNumber].buildingTypes[1] = 0;
     blockNumber++;
     
@@ -163,12 +165,11 @@ void initCityPlan() {
 
 void generateCityPlan() {
     // Initialize the list that stores each building information
-    std::list<buildingInformation> buildingsInformation;
     //short buildingIterator = 0;
     //int *worstCaseBuildings = new int[(numberOfBlockLines*numberOfBlockColumns*4)];
     // initialize random seed
     srand ((int) time(NULL));
-    
+    /*
     for (int i = 0; i < 12; i++) {
         for (int j = 0; j < blockTypes[i].numberOfBuildings; j++) {
             printf("blockTypes[%d].buildingTypes[%d] = %hd\n", i, j, blockTypes[i].buildingTypes[j]);
@@ -176,11 +177,11 @@ void generateCityPlan() {
     }
     
     printf("\n\n\n\n\n");
-
+    */
     
     int randomBlock;
-    for (int line = 0, blockLinePosition = 0; line <= numberOfBlockLines; line++, blockLinePosition += 3) {
-        for (int column = 0, blockColumnPosition = 0; column <= numberOfBlockColumns; column++, blockColumnPosition += 3) {
+    for (int line = 0, blockLinePosition = 0; line <= numberOfBlockLines; line++) {
+        for (int column = 0, blockColumnPosition = 0; column <= numberOfBlockColumns; column++) {
             randomBlock = rand() % 12;
             for (int building = 0; building < blockTypes[randomBlock].numberOfBuildings; building++) {
                 // Randomically generate building information
@@ -193,20 +194,36 @@ void generateCityPlan() {
                 thisBuilding.numberOfFloors = randomNumberOfFloors;
                 thisBuilding.texture        = randomTexture;
                 thisBuilding.type           = blockTypes[randomBlock].buildingTypes[building];
-                printf("blockTypes[%d].buildingTypes[%d] = %hd\n", randomBlock, building, blockTypes[randomBlock].buildingTypes[building]);
+                //printf("blockTypes[%d].buildingTypes[%d] = %hd\n", randomBlock, building, blockTypes[randomBlock].buildingTypes[building]);
+                
+                
                 //-----------
                 // Calculate the exact position of the building in the block
                 //-----------
-                thisBuilding.positionX      = blockLinePosition;
-                thisBuilding.positionZ      = blockColumnPosition;
+                thisBuilding.positionX = blockColumnPosition;
+                thisBuilding.positionZ = blockLinePosition;
                 
+                
+                // This switch sets position of the next building in this block
                 switch (thisBuilding.type) {
                     case 0:
-                        if (building) {
-                            //<#statements#>
+                        if (building == 1) { // case 1
+                            blockColumnPosition--;
+                            blockLinePosition++;
+                        } else { // case 0: case 2:
+                            blockColumnPosition++;
                         }
                         break;
-                        
+                    case 1: case 5:
+                        blockLinePosition++;
+                        break;
+                    case 2: case 3:
+                        blockColumnPosition++;
+                        break;
+                    case 4:
+                        blockLinePosition++;
+                        blockColumnPosition++;
+                        break;
                     default:
                         break;
                 }
@@ -215,7 +232,12 @@ void generateCityPlan() {
                 buildingsInformation.push_back(thisBuilding);
                 //printf("Building %d  of block (%dx%d) has texture %d and %d floors.\n", building, line, column, randomTexture, randomNumberOfFloors);
             }
+            // Restore position values to the beginning of the next block in this row (line)
+            blockColumnPosition = (column+1) * 3;
+            blockLinePosition = line * 3;
         }
+        // Restore position values to the beginning of the next block in the next row (line)
+        //blockLinePosition = (line+1) * 3;
     }
     short iteratorCount = 0;
     std::list<buildingInformation>::iterator buildingsInformationIterator;
