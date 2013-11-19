@@ -22,6 +22,8 @@
 
 #include <string>
 #include <map>
+#include <stdio.h>
+
 
 namespace wolf
 {
@@ -37,10 +39,13 @@ namespace wolf
         void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix);
 		void SetPosition(const glm::vec3& position);
         glm::mat4 GetPosition();
+        
         void SetScale(float x, float y, float z);
         void SetRotation(float angle, float x, float y, float z);
         void SetColor(float red, float green, float blue, float a);
-
+        void SetTexture(short _texture);
+        void SetType(short _type);
+        void SetNumberOfFloors(short _numberOfFloors);
         
 		//-------------------------------------------------------------------------
         
@@ -66,6 +71,10 @@ namespace wolf
         glm::mat4 scaleMatrix;
         glm::mat4 rotationMatrix;
         
+        // Building parameters
+        short texture;
+        short type;
+        short numberOfFloors;
 		//-------------------------------------------------------------------------
         
     };

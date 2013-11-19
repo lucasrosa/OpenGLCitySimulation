@@ -767,6 +767,7 @@ void RenderAssignment2()
     // Iterate through the buildings list
     for (buildingsInformationIterator = buildingsInformation.begin() ; buildingsInformationIterator != buildingsInformation.end(); buildingsInformationIterator++){
         building->SetPosition(glm::vec3((*buildingsInformationIterator).positionX, 0.0f, (*buildingsInformationIterator).positionZ));
+        building->SetTexture((*buildingsInformationIterator).texture);
         building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
         /*
         //        (*buildingsInformationIterator).

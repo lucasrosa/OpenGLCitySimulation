@@ -7,7 +7,7 @@
 //
 
 #include "W_Building.h"
-
+#include <stdio.h>
 namespace wolf {
     
     struct Vertex
@@ -65,8 +65,8 @@ namespace wolf {
         { -0.5f, -0.5f,-0.5f, 0, 1 },
         { -0.5f, -0.5f, 0.5f, 0, 0 },
     };
-    static GLuint tex;
-    static wolf::Texture* wallTexture0 = 0;
+    //static GLuint tex;
+    static wolf::Texture* wallTexture[8];
     //----------------------------------------------------------
     // Constructor
     //----------------------------------------------------------
@@ -75,7 +75,7 @@ namespace wolf {
     {
         
         
-        vertexBuffer = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(Vertex) * 6 * 3 * 2);
+        vertexBuffer = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(Vertex) * 4 * 3 * 2);
         
         vertexDeclaration = new wolf::VertexDeclaration();
         vertexDeclaration->Begin();
@@ -99,7 +99,19 @@ namespace wolf {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         */
         //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
-        wallTexture0 = wolf::TextureManager::CreateTexture("data/week11/building/5.tga");
+        // TODO: MAKE AN ARRAY
+        for (int i = 0; i < 8; i++) {
+            //std::string s = string(itoa(i));
+            //std::string textureName = std::string("data/week11/building/") + std::string(texture);
+            char buffer [50];
+            char char_texture = i + '0';
+            sprintf (buffer, "data/week11/building/%c.tga", char_texture);
+            
+            //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
+            wallTexture[i] = wolf::TextureManager::CreateTexture(buffer);
+        }
+        
+        
         //g_pTexture->SetWrapMode(wolf::Texture::WM_Repeat, wolf::Texture::WM_Repeat);
         
         // Initialize matrices values
@@ -124,6 +136,14 @@ namespace wolf {
         rotationMatrix = glm::rotate(angle, x, y, z);
     }
     
+    void Building::SetTexture(short _texture) {
+        texture = _texture;
+    }
+    
+    void Building::SetType(short _type) {
+        type = _type;
+    }
+    
     void Building::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix)
     {
         projectionMatrix = _projectionMatrix;
@@ -135,7 +155,7 @@ namespace wolf {
         program->Bind();
         
         // Bind texture
-        wallTexture0->Bind();
+        wallTexture[texture]->Bind();
         
         // Bind Uniforms
         program->SetUniform("projection", *projectionMatrix);
