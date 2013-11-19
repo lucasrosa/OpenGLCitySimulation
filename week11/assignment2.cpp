@@ -78,6 +78,7 @@ void initCityPlan() {
     blockTypes[blockNumber].buildingTypes[0] = 0;
     blockTypes[blockNumber].buildingTypes[1] = 0;
     blockTypes[blockNumber].buildingTypes[2] = 2;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 2 ----------> 3 buildings: 2 of normal size and one of double size, double size on the north
@@ -85,8 +86,9 @@ void initCityPlan() {
     //                          2 3
     blockTypes[blockNumber].numberOfBuildings = 3;
     blockTypes[blockNumber].buildingTypes[0] = 2;
-    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = -1;
     blockTypes[blockNumber].buildingTypes[2] = 0;
+    blockTypes[blockNumber].buildingTypes[3] = 0;
     blockNumber++;
     
     //--------- Block type 3 ----------> 3 buildings: 2 of normal size and one of double size, double size on the right
@@ -96,6 +98,7 @@ void initCityPlan() {
     blockTypes[blockNumber].buildingTypes[0] = 0;
     blockTypes[blockNumber].buildingTypes[1] = 1;
     blockTypes[blockNumber].buildingTypes[2] = 0;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 4 ----------> 3 buildings: 2 of normal size and one of double size, double size on the left
@@ -104,7 +107,8 @@ void initCityPlan() {
     blockTypes[blockNumber].numberOfBuildings = 3;
     blockTypes[blockNumber].buildingTypes[0] = 1;
     blockTypes[blockNumber].buildingTypes[1] = 0;
-    blockTypes[blockNumber].buildingTypes[2] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = 0;
 
     blockNumber++;
     
@@ -114,6 +118,8 @@ void initCityPlan() {
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 1;
     blockTypes[blockNumber].buildingTypes[1] = 1;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 6 ----------> 2 buildings: 2 double size horizontally positioned
@@ -121,7 +127,9 @@ void initCityPlan() {
     //                          2 2
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 2;
-    blockTypes[blockNumber].buildingTypes[1] = 2;
+    blockTypes[blockNumber].buildingTypes[1] = -1;
+    blockTypes[blockNumber].buildingTypes[2] = 2;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 7 ----------> 2 buildings: 1 of triple size rotated 180 degrees and 1 of normal size
@@ -129,7 +137,9 @@ void initCityPlan() {
     //                          2 1
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 5;
-    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = -1;
+    blockTypes[blockNumber].buildingTypes[2] = 0;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 8 ----------> 2 buildings: 1 of normal size and one of triple size rotated 270 degrees
@@ -138,6 +148,8 @@ void initCityPlan() {
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 0;
     blockTypes[blockNumber].buildingTypes[1] = 6;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 9 ----------> 2 buildings: 1 of triple size and one of normal size
@@ -146,6 +158,8 @@ void initCityPlan() {
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 3;
     blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
     blockNumber++;
     
     //--------- Block type 10 ----------> 2 buildings: 1 of triple size rotated 90 degrees and one of normal size
@@ -153,7 +167,9 @@ void initCityPlan() {
     //                          1 2
     blockTypes[blockNumber].numberOfBuildings = 2;
     blockTypes[blockNumber].buildingTypes[0] = 4;
-    blockTypes[blockNumber].buildingTypes[1] = 0;
+    blockTypes[blockNumber].buildingTypes[1] = -1;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = 0;
     blockNumber++;
     
     //--------- Block type 11 ----------> 1 building of quadruple size
@@ -161,6 +177,9 @@ void initCityPlan() {
     //                          1 1
     blockTypes[blockNumber].numberOfBuildings = 1;
     blockTypes[blockNumber].buildingTypes[0] = 7;
+    blockTypes[blockNumber].buildingTypes[1] = -1;
+    blockTypes[blockNumber].buildingTypes[2] = -1;
+    blockTypes[blockNumber].buildingTypes[3] = -1;
 }
 
 void generateCityPlan() {
@@ -182,8 +201,17 @@ void generateCityPlan() {
     int randomBlock;
     for (int line = 0, blockLinePosition = 0; line <= numberOfBlockLines; line++) {
         for (int column = 0, blockColumnPosition = 0; column <= numberOfBlockColumns; column++) {
+            
+            // Restore position values to the beginning of the next block in this row (line)
+            blockColumnPosition = column * 3;
+            blockLinePosition = line * 3;
+            //printf("%d x %d \n", blockLinePosition, blockColumnPosition);
             randomBlock = rand() % 12;
-            for (int building = 0; building < blockTypes[randomBlock].numberOfBuildings; building++) {
+            //for (int building = 0; building < blockTypes[randomBlock].numberOfBuildings; building++) {
+            for (int building = 0; building < 4; building++) {
+                if (blockTypes[randomBlock].buildingTypes[building] == -1) {
+                    continue;
+                }
                 // Randomically generate building information
                 int randomNumberOfFloors = (rand() % numberOfFloors+1) + 1; // Generates a number between 1 and 15 (there's no 0 floors);
                 int randomTexture;
@@ -201,6 +229,9 @@ void generateCityPlan() {
                 // Calculate the exact position of the building in the block
                 //-----------
                 thisBuilding.positionX = blockColumnPosition;
+                if (blockLinePosition == 2) {
+                    printf("\n\n\n\nBAM!\n\n\n\n\n");
+                }
                 thisBuilding.positionZ = blockLinePosition;
                 
                 
@@ -210,19 +241,27 @@ void generateCityPlan() {
                         if (building == 1) { // case 1
                             blockColumnPosition--;
                             blockLinePosition++;
-                        } else { // case 0: case 2:
+                        } else if (building == 0 || building == 2){ // case 0: case 2:
                             blockColumnPosition++;
                         }
                         break;
-                    case 1: case 5:
-                        blockLinePosition++;
+                    case 2: case 5:
+                        if (building == 0) {
+                            blockLinePosition++;
+                        } else if (thisBuilding.type == 5 && building == 1) {
+                            blockLinePosition++;
+                        }
                         break;
-                    case 2: case 3:
-                        blockColumnPosition++;
+                    case 1: case 3:
+                        if (building == 0) {
+                            blockColumnPosition++;
+                        }
                         break;
                     case 4:
-                        blockLinePosition++;
-                        blockColumnPosition++;
+                        if (building == 0) {
+                            blockLinePosition++;
+                            blockColumnPosition++;
+                        }
                         break;
                     default:
                         break;
@@ -232,13 +271,11 @@ void generateCityPlan() {
                 buildingsInformation.push_back(thisBuilding);
                 //printf("Building %d  of block (%dx%d) has texture %d and %d floors.\n", building, line, column, randomTexture, randomNumberOfFloors);
             }
-            // Restore position values to the beginning of the next block in this row (line)
-            blockColumnPosition = (column+1) * 3;
-            blockLinePosition = line * 3;
         }
         // Restore position values to the beginning of the next block in the next row (line)
         //blockLinePosition = (line+1) * 3;
     }
+    
     short iteratorCount = 0;
     std::list<buildingInformation>::iterator buildingsInformationIterator;
     // Iterate through the buildings list
@@ -253,6 +290,7 @@ void generateCityPlan() {
         printf("    positionZ: %f\n",         (*buildingsInformationIterator).positionZ);
         iteratorCount++;
     }
+     
 }
 
 
@@ -708,7 +746,7 @@ void RenderAssignment2()
     //building->SetRotation(s_fRot, 0.0f, 1.0f, 0.0f);
     //building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
     
-    
+    /*
     for (int j = 0, posJ = 0; j < 22; j++, posJ++) {
         for (int i = 0, posI = 0; i < 22; i++, posI++) {
             building->SetPosition(glm::vec3(posI, 0.0f, posJ));
@@ -722,6 +760,24 @@ void RenderAssignment2()
         
         if (j % 2 != 0)
             posJ += 1;
+    }
+    */
+    //short iteratorCount = 0;
+    std::list<buildingInformation>::iterator buildingsInformationIterator;
+    // Iterate through the buildings list
+    for (buildingsInformationIterator = buildingsInformation.begin() ; buildingsInformationIterator != buildingsInformation.end(); buildingsInformationIterator++){
+        building->SetPosition(glm::vec3((*buildingsInformationIterator).positionX, 0.0f, (*buildingsInformationIterator).positionZ));
+        building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+        /*
+        //        (*buildingsInformationIterator).
+        printf("Building: %hd:\n", iteratorCount);
+        printf("    numberOfFloors: %hd\n",   (*buildingsInformationIterator).numberOfFloors);
+        printf("    texture: %hd\n",          (*buildingsInformationIterator).texture);
+        printf("    type: %hd\n",             (*buildingsInformationIterator).type);
+        printf("    positionX: %f\n",         (*buildingsInformationIterator).positionX);
+        printf("    positionZ: %f\n",         (*buildingsInformationIterator).positionZ);
+        iteratorCount++;
+         */
     }
     
     // Calculate our camera movement
