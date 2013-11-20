@@ -67,7 +67,8 @@ namespace wolf {
         { -0.5f, -0.5f, 0.5f, 0, 0 },
     };
     //static GLuint tex;
-    static wolf::Texture* wallTexture[8];
+    #define ROAD_TEXTURE_SIZE 3
+    static wolf::Texture* roadTexture[ROAD_TEXTURE_SIZE];
     //----------------------------------------------------------
     // Constructor
     //----------------------------------------------------------
@@ -101,7 +102,7 @@ namespace wolf {
          */
         //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
         // TODO: MAKE AN ARRAY
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < ROAD_TEXTURE_SIZE; i++) {
             //std::string s = string(itoa(i));
             //std::string textureName = std::string("data/week11/building/") + std::string(texture);
             char buffer [50];
@@ -109,7 +110,7 @@ namespace wolf {
             sprintf (buffer, "data/week11/textures/road/%c.tga", char_texture);
             
             //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
-            wallTexture[i] = wolf::TextureManager::CreateTexture(buffer);
+            roadTexture[i] = wolf::TextureManager::CreateTexture(buffer);
         }
         
         
@@ -156,7 +157,7 @@ namespace wolf {
         program->Bind();
         
         // Bind texture
-        wallTexture[texture]->Bind();
+        roadTexture[texture]->Bind();
         
         // Bind Uniforms
         program->SetUniform("projection", *projectionMatrix);

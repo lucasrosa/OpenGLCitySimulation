@@ -20,6 +20,7 @@
 #include "W_MaterialManager.h"
 
 #include "W_Building.h"
+#include "W_Road.h"
 #include "W_Model.h"
 
 #include <time.h>       /* time */ // For random number generation
@@ -555,6 +556,8 @@ void handleKeypress(int theKey, int theAction)
 
 // Define the Building
 static wolf::Building* building = 0;
+// Define the Road
+static wolf::Road* road = 0;
 
 // Define the programs
 static wolf::Program* program; //q_pProgram;
@@ -609,9 +612,10 @@ void InitAssignment2()
     // Instantiate the programs
     //program       = wolf::ProgramManager::CreateProgram("data/week11/polyhedron.vsh", "data/week11/polyhedron.fsh");
     program         = wolf::ProgramManager::CreateProgram("data/week11/cube.vsh", "data/week11/cube.fsh");
-    // Instantiate the Cube
+    // Instantiate the Building
     building = new wolf::Building();
-    
+    // Instantiate the Road
+    road = new wolf::Road();
     
     //
     //g_pModel = new wolf::Model("data/week9/building/building.pod","data/week9/building/");
@@ -810,6 +814,31 @@ void RenderAssignment2()
          */
     }
     
+    // Draw the roads
+    for (int line = 0; line < numberOfBlockLines+1; line++) {
+        float zPosition = (line)*3-1;
+        for (int column = 0; column < numberOfBlockColumns * 3 + 2; column++) {
+            float xPosition = column;
+            //printf("Road: %fx%f\n", zPosition, xPosition);
+            //printf("%f !=")
+            //float intersection = (column*3-1);
+            if ((column+1) % 3 != 0) { // Intersection
+                road->SetTexture(0);
+            } else {
+                road->SetTexture(1);
+                road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+1));
+                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+2));
+                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                
+                road->SetTexture(2);
+            }
+            if (zPosition > -1) {
+                road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition));
+                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+            }
+        }
+    }
     // Calculate our camera movement
     calculateCameraMovement();
     
