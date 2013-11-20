@@ -150,78 +150,45 @@ namespace wolf {
     
     void Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position)
     {
-    switch (type) {
-        case 6:
-            for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
-                this->SetPosition(glm::vec3(_position.x-1.0f, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-            }
-            break;
-        case 0:
+        // Add the building
+        //if (type == 0 || type == 1 || type == 2 || type == 3 || type == 4 || type == 5 || type == 6 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x, i, _position.z));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
-            //break; // Everybody has this
-        case 1:
+        //}
+        
+        // Add a building to the south
+        if (type == 1 || type == 3 || type == 4 ||  type == 6 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x, i, _position.z + 1.0f));
+                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
-            break;
-        case 2:
+        }
+        
+        // Add a building to the east
+        if (type == 2 || type == 4 || type == 5 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
-            break;
-        case 3:
+        }
+        
+        // Add a building to the southeast
+        if (type == 5 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
                 this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z+1.0f));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
-            break;
-        case 4:
+        }
+        
+        // Add a building to the southwest
+        if (type == 6) {
             for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
-                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
+                this->SetPosition(glm::vec3(_position.x-1.0f, i, _position.z+1.0f));
                 this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
             }
-            break;
-        case 5:
-            for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x+1.0, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
-                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-            }
-            break;
-        case 7:
-            for (float i = 0; i < numberOfFloors; i++) {
-                this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
-                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-                
-                this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-            }
-            break;
-        default:
-            this->SetPosition(glm::vec3(_position.x, 0.0f, _position.z));
-            this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
-            break;
-    }
+        }
     }
     void Building::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix)
     {
