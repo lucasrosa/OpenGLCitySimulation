@@ -31,6 +31,9 @@ int numberOfBlockColumns = 11;
 int numberOfTextures     = 8;
 int numberOfFloors       = 8;
 
+// Regenerate the city
+short r_button_down = 0;
+
 struct blockType {
     short numberOfBuildings;
     short buildingTypes[4];
@@ -183,8 +186,9 @@ void initCityPlan() {
 }
 
 void generateCityPlan() {
-    // Initialize the list that stores each building information
-    //short buildingIterator = 0;
+    printf("LOG: generateCityPlan() called.\n");
+    // Clean the list that stores each building information
+    buildingsInformation.clear();
     //int *worstCaseBuildings = new int[(numberOfBlockLines*numberOfBlockColumns*4)];
     // initialize random seed
     srand ((int) time(NULL));
@@ -275,13 +279,13 @@ void generateCityPlan() {
         // Restore position values to the beginning of the next block in the next row (line)
         //blockLinePosition = (line+1) * 3;
     }
-    
+    /*
     short iteratorCount = 0;
     std::list<buildingInformation>::iterator buildingsInformationIterator;
     // Iterate through the buildings list
     for (buildingsInformationIterator = buildingsInformation.begin() ; buildingsInformationIterator != buildingsInformation.end(); buildingsInformationIterator++){
         
-//        (*buildingsInformationIterator).
+        //        (*buildingsInformationIterator).
         printf("Building: %hd:\n", iteratorCount);
         printf("    numberOfFloors: %hd\n",   (*buildingsInformationIterator).numberOfFloors);
         printf("    texture: %hd\n",          (*buildingsInformationIterator).texture);
@@ -290,7 +294,7 @@ void generateCityPlan() {
         printf("    positionZ: %f\n",         (*buildingsInformationIterator).positionZ);
         iteratorCount++;
     }
-     
+    */
 }
 
 
@@ -635,9 +639,18 @@ void InitAssignment2()
 
 void RenderAssignment2()
 {
-    //if( glfwGetKey( 'R' ) == GLFW_PRESS ) {
-        
-    //}
+    // Regenerate city based on press of key R
+    if (glfwGetKey( 'R' ) == GLFW_PRESS) {
+        // If the R key was not being pressed before, change to the next mode
+        if (r_button_down == 0) {
+            generateCityPlan();
+        }
+        // Identifies that the R key is being pressed
+        r_button_down = 1;
+    } else {
+        // Identifies that the R key is not being pressed
+        r_button_down = 0;
+    }
     //------
     // Reset the matrix
     //glMatrixMode(GL_MODELVIEW);
