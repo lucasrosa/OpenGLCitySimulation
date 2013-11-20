@@ -1,14 +1,13 @@
 //
-//  W_Building.h
+//  W_Roof.h
 //  week11
 //
-//  Created by Lucas Furlani on 11/13/2013.
+//  Created by Lucas Furlani on 11/19/2013.
 //
 //
 
-#ifndef __week11__W_Building__
-#define __week11__W_Building__
-
+#ifndef __week11__W_Roof__
+#define __week11__W_Roof__
 
 #include <iostream>
 #include "W_VertexBuffer.h"
@@ -27,18 +26,16 @@
 
 namespace wolf
 {
-    class Building
+    class Roof
     {
 	public:
 		//-------------------------------------------------------------------------
 		// PUBLIC INTERFACE
 		//-------------------------------------------------------------------------
-        //Building(glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix);
-        Building();
-        // Draw the building in the screen
+        //Roof(glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix);
+        Roof();
+        // Draw the ceiling in the screen
         void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix);
-        // Building the building
-        void Build (wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position);
 		void SetPosition(const glm::vec3& position);
         glm::mat4 GetPosition();
         
@@ -46,7 +43,6 @@ namespace wolf
         void SetRotation(float angle, float x, float y, float z);
         void SetTexture(short _texture);
         void SetType(short _type);
-        void SetNumberOfFloors(short _numberOfFloors);
         
 		//-------------------------------------------------------------------------
         
@@ -72,15 +68,13 @@ namespace wolf
         glm::mat4 scaleMatrix;
         glm::mat4 rotationMatrix;
         
-        // Building parameters
+        // Roof parameters
         short texture;
         short type;
-        short numberOfFloors;
 		//-------------------------------------------------------------------------
         
     };
     
 }
 
-
-#endif /* defined(__week5__D_Cube__) */
+#endif /* defined(__week11__W_Roof__) */
