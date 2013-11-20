@@ -28,8 +28,9 @@
 // Define number of blocks
 int numberOfBlockLines   = 11;
 int numberOfBlockColumns = 11;
-int numberOfTextures     = 8;
-int numberOfFloors       = 8;
+short numberOfTextures     = 8;
+short numberOfRoofTextures = 2;
+short numberOfFloors       = 8;
 
 // Regenerate the city
 short r_button_down = 0;
@@ -42,6 +43,7 @@ struct blockType {
 struct buildingInformation {
     short numberOfFloors;
     short texture;
+    short roofTexture;
     short type;
     float positionX;
     float positionZ;
@@ -218,13 +220,14 @@ void generateCityPlan() {
                 }
                 // Randomically generate building information
                 int randomNumberOfFloors = (rand() % numberOfFloors+1) + 1; // Generates a number between 1 and 15 (there's no 0 floors);
-                int randomTexture;
-                randomTexture = rand() % numberOfTextures;
+                int randomTexture = rand() % numberOfTextures;
+                int randomRoofTexture = rand() % numberOfRoofTextures;
                 
                 //Assign the building information to a temporary variable and add it to the list
                 struct buildingInformation thisBuilding;
                 thisBuilding.numberOfFloors = randomNumberOfFloors;
                 thisBuilding.texture        = randomTexture;
+                thisBuilding.roofTexture    = randomRoofTexture;
                 thisBuilding.type           = blockTypes[randomBlock].buildingTypes[building];
                 //printf("blockTypes[%d].buildingTypes[%d] = %hd\n", randomBlock, building, blockTypes[randomBlock].buildingTypes[building]);
                 
@@ -233,9 +236,6 @@ void generateCityPlan() {
                 // Calculate the exact position of the building in the block
                 //-----------
                 thisBuilding.positionX = blockColumnPosition;
-                if (blockLinePosition == 2) {
-                    printf("\n\n\n\nBAM!\n\n\n\n\n");
-                }
                 thisBuilding.positionZ = blockLinePosition;
                 
                 
@@ -756,8 +756,8 @@ void RenderAssignment2()
 	//g_pModel->Render(worldMatrix,viewMatrix,projectionMatrix);
     
     // Draw building 1
-    building->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    building->SetScale(1.0f, 1.0f, 1.0f);
+    //building->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    //building->SetScale(1.0f, 1.0f, 1.0f);
     //building->SetRotation(s_fRot, 0.0f, 1.0f, 0.0f);
     //building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
     
@@ -789,11 +789,14 @@ void RenderAssignment2()
         //building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
         float x_position = (*buildingsInformationIterator).positionX;
         float z_position = (*buildingsInformationIterator).positionZ;
+        short roofTexture = (*buildingsInformationIterator).roofTexture;
         building->Build(program,
                         &projectionMatrix,
                         &viewMatrix,
                         worldMatrix,
-                        glm::vec3(x_position, 0.0f, z_position));
+                        glm::vec3(x_position, 0.0f, z_position),
+                        roofTexture
+                        );
         
         /*
         //        (*buildingsInformationIterator).

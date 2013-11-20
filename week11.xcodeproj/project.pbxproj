@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C1CC0121834087100B6F641 /* assignment2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C1CC0101834087100B6F641 /* assignment2.cpp */; };
 		1C1CC0151834487E00B6F641 /* W_Building.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C1CC0131834487E00B6F641 /* W_Building.cpp */; };
+		1CBE0002183C6D5E00B7738C /* W_Road.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CBE0000183C6D5E00B7738C /* W_Road.cpp */; };
 		1CBEFFFF183C60A500B7738C /* W_Roof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CBEFFFD183C60A500B7738C /* W_Roof.cpp */; };
 		E143211B15FD68C900813DB6 /* example2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143211A15FD68C900813DB6 /* example2.cpp */; };
 		E143211D15FD6B5800813DB6 /* example3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143211C15FD6B5800813DB6 /* example3.cpp */; };
@@ -70,6 +71,8 @@
 		1C1CC0101834087100B6F641 /* assignment2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = assignment2.cpp; sourceTree = "<group>"; };
 		1C1CC0131834487E00B6F641 /* W_Building.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Building.cpp; sourceTree = "<group>"; };
 		1C1CC0141834487E00B6F641 /* W_Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Building.h; sourceTree = "<group>"; };
+		1CBE0000183C6D5E00B7738C /* W_Road.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Road.cpp; sourceTree = "<group>"; };
+		1CBE0001183C6D5E00B7738C /* W_Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Road.h; sourceTree = "<group>"; };
 		1CBEFFFD183C60A500B7738C /* W_Roof.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Roof.cpp; sourceTree = "<group>"; };
 		1CBEFFFE183C60A500B7738C /* W_Roof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Roof.h; sourceTree = "<group>"; };
 		E143211A15FD68C900813DB6 /* example2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example2.cpp; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				E143212015FD89A600813DB6 /* example5.cpp */,
 				E143212215FD8CB100813DB6 /* example6.cpp */,
 				1C1CC0101834087100B6F641 /* assignment2.cpp */,
+				1CBE0000183C6D5E00B7738C /* W_Road.cpp */,
+				1CBE0001183C6D5E00B7738C /* W_Road.h */,
 				1C1CC0131834487E00B6F641 /* W_Building.cpp */,
 				1C1CC0141834487E00B6F641 /* W_Building.h */,
 				E14BDCAA15C8389700EBDCCE /* examples.h */,
@@ -369,6 +374,7 @@
 				E14BDCDF15D0AF4D00EBDCCE /* W_Program.cpp in Sources */,
 				E14BDCE015D0AF4D00EBDCCE /* W_VertexBuffer.cpp in Sources */,
 				E14BDCE115D0AF4D00EBDCCE /* W_VertexDeclaration.cpp in Sources */,
+				1CBE0002183C6D5E00B7738C /* W_Road.cpp in Sources */,
 				E14BDD4F15F5109600EBDCCE /* W_Texture.cpp in Sources */,
 				E14BDD5415F530D700EBDCCE /* W_Material.cpp in Sources */,
 				E14BDD5915F5A35C00EBDCCE /* W_TextureManager.cpp in Sources */,

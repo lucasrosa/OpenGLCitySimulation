@@ -101,12 +101,12 @@ namespace wolf {
          */
         //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
         // TODO: MAKE AN ARRAY
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             //std::string s = string(itoa(i));
             //std::string textureName = std::string("data/week11/building/") + std::string(texture);
             char buffer [50];
             char char_texture = i + '0';
-            sprintf (buffer, "data/week11/ceiling/%c.tga", char_texture);
+            sprintf (buffer, "data/week11/textures/roof/%c.tga", char_texture);
             
             //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
             wallTexture[i] = wolf::TextureManager::CreateTexture(buffer);
