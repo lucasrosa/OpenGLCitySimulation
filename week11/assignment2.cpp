@@ -826,10 +826,10 @@ void RenderAssignment2()
                 road->SetTexture(0);
             } else {
                 road->SetTexture(1);
-                road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+1));
-                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
-                road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+2));
-                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                for (int i = 1; i <= 2; i++) {
+                    road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+i));
+                    road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                }
                 
                 road->SetTexture(2);
             }
