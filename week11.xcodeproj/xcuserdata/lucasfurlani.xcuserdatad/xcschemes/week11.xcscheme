@@ -64,7 +64,8 @@
    <ProfileAction
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
-      useCustomWorkingDirectory = "NO"
+      useCustomWorkingDirectory = "YES"
+      customWorkingDirectory = "/Users/lucasfurlani/Dropbox/UPEI/Fall/CS 435 - Computer Graphics/Week9Samples"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>

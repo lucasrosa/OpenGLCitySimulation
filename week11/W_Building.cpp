@@ -103,7 +103,7 @@ namespace wolf {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         */
         //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
-        // TODO: MAKE AN ARRAY
+        
         for (int i = 0; i < 8; i++) {
             //std::string s = string(itoa(i));
             //std::string textureName = std::string("data/week11/building/") + std::string(texture);
