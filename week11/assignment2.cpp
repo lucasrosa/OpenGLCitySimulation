@@ -33,6 +33,12 @@ short numberOfTextures     = 8;
 short numberOfRoofTextures = 2;
 short numberOfFloors       = 8;
 
+//**********************************
+// SUN
+float sun[2];
+short sunReachedUp = 0;
+//**********************************
+
 // Regenerate the city
 short r_button_down = 0;
 
@@ -301,7 +307,6 @@ GLfloat camXSpeed = 0.0f;
 GLfloat camYSpeed = 0.0f;
 GLfloat camZSpeed = 0.0f;
 
-GLint frameCount = 0; // How many frames have we drawn?
 
 // How fast we move (higher values mean we move and strafe faster)
 //GLfloat movementSpeedFactor = .125f;
@@ -533,7 +538,8 @@ static wolf::Building* building = 0;
 static wolf::Road* road = 0;
 
 // Define the programs
-static wolf::Program* program; //q_pProgram;
+
+static wolf::Program* buildingProgram; //q_pProgram;
 
 // Define the general matrices
 static glm::mat4 projectionMatrix = glm::perspective(45.0f, 640.0f / 480.0f, 0.1f, 1000.0f);
@@ -542,6 +548,8 @@ static glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec
 
 void InitAssignment2()
 {
+    sun[0] = -1.0f;
+    sun[1] = 0.0f;
     initCityPlan();
     generateCityPlan();
     
@@ -553,7 +561,8 @@ void InitAssignment2()
     
     // Instantiate the programs
     //program       = wolf::ProgramManager::CreateProgram("data/week11/polyhedron.vsh", "data/week11/polyhedron.fsh");
-    program         = wolf::ProgramManager::CreateProgram("data/week11/cube.vsh", "data/week11/cube.fsh");
+    //program         = wolf::ProgramManager::CreateProgram("data/week11/cube.vsh", "data/week11/cube.fsh");
+    buildingProgram         = wolf::ProgramManager::CreateProgram("data/week11/building.vsh", "data/week11/building.fsh");
     // Instantiate the Building
     building = new wolf::Building();
     // Instantiate the Road
@@ -577,6 +586,23 @@ void InitAssignment2()
 
 void RenderAssignment2()
 {
+    // Calculating the sun sun
+    sun[0] += 0.01f;
+    if (sun[0]  >= 1.0f) {
+        sun[0] = -1.0f;
+    }
+    if (sunReachedUp) {
+        sun[1] -= 0.01f;
+    } else {
+        sun[1] += 0.01f;
+    }
+    
+    if (sun[1]  >= 1.0f) {
+        sunReachedUp = 1;
+    } else if (sun[1]  <= 0.0f) {
+        sunReachedUp = 0;
+    }
+        
     // Regenerate city based on press of key R
     if (glfwGetKey( 'R' ) == GLFW_PRESS) {
         // If the R key was not being pressed before, change to the next mode
@@ -617,12 +643,13 @@ void RenderAssignment2()
         float x_position = (*buildingsInformationIterator).positionX;
         float z_position = (*buildingsInformationIterator).positionZ;
         short roofTexture = (*buildingsInformationIterator).roofTexture;
-        building->Build(program,
+        building->Build(buildingProgram,
                         &projectionMatrix,
                         &viewMatrix,
                         worldMatrix,
                         glm::vec3(x_position, 0.0f, z_position),
-                        roofTexture
+                        roofTexture,
+                        sun
                         );
         
         
@@ -642,14 +669,14 @@ void RenderAssignment2()
                 road->SetTexture(1);
                 for (int i = 1; i <= 2; i++) {
                     road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition+i));
-                    road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                    road->Render(buildingProgram, &projectionMatrix, &viewMatrix, worldMatrix, sun);
                 }
                 
                 road->SetTexture(2);
             }
             if (zPosition > -1) {
                 road->SetPosition(glm::vec3(xPosition, 0.0f, zPosition));
-                road->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
+                road->Render(buildingProgram, &projectionMatrix, &viewMatrix, worldMatrix, sun);
             }
         }
     }
@@ -658,9 +685,6 @@ void RenderAssignment2()
     
     // Move our camera
     moveCamera();
-    
-    // Increase our frame counter
-    frameCount++;
 }
 
 

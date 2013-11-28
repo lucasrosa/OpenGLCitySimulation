@@ -14,40 +14,41 @@ namespace wolf {
     {
         GLfloat x,y,z;
         GLfloat u,v;
+        GLfloat nx, ny, nz;
     };
     
     static const Vertex cubeVertices[] = {
         // Front
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
-        { -0.5f,  0.5f, 0.5f, 0, 1 },
-        {  0.5f,  0.5f, 0.5f, 1, 1 },
-        {  0.5f,  0.5f, 0.5f, 1, 1 },
-        {  0.5f, -0.5f, 0.5f, 1, 0 },
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
+        { -0.5f, -0.5f, 0.5f, 0, 0, 0, 0, 1 },
+        { -0.5f,  0.5f, 0.5f, 0, 1, 0, 0, 1 },
+        {  0.5f,  0.5f, 0.5f, 1, 1, 0, 0, 1 },
+        {  0.5f,  0.5f, 0.5f, 1, 1, 0, 0, 1 },
+        {  0.5f, -0.5f, 0.5f, 1, 0, 0, 0, 1 },
+        { -0.5f, -0.5f, 0.5f, 0, 0, 0, 0, 1 },
         
         // Back
-        {  0.5f,  0.5f,-0.5f, 1, 1 },
-        { -0.5f,  0.5f,-0.5f, 0, 1 },
-        { -0.5f, -0.5f,-0.5f, 0, 0 },
-        { -0.5f, -0.5f,-0.5f, 0, 0 },
-        {  0.5f, -0.5f,-0.5f, 1, 0 },
-        {  0.5f,  0.5f,-0.5f, 1, 1 },
+        {  0.5f,  0.5f,-0.5f, 1, 1, 0, 0, -1 },
+        { -0.5f,  0.5f,-0.5f, 0, 1, 0, 0, -1 },
+        { -0.5f, -0.5f,-0.5f, 0, 0, 0, 0, -1 },
+        { -0.5f, -0.5f,-0.5f, 0, 0, 0, 0, -1 },
+        {  0.5f, -0.5f,-0.5f, 1, 0, 0, 0, -1 },
+        {  0.5f,  0.5f,-0.5f, 1, 1, 0, 0, -1 },
         
         // Left
-        { -0.5f,  0.5f,-0.5f, 0, 1 },
-        { -0.5f,  0.5f, 0.5f, 1, 1 },
-        { -0.5f, -0.5f, 0.5f, 1, 0 },
-        { -0.5f, -0.5f, 0.5f, 1, 0 },
-        { -0.5f, -0.5f,-0.5f, 0, 0 },
-        { -0.5f,  0.5f,-0.5f, 0, 1 },
+        { -0.5f,  0.5f,-0.5f, 0, 1, -1, 0, 0 },
+        { -0.5f,  0.5f, 0.5f, 1, 1, -1, 0, 0 },
+        { -0.5f, -0.5f, 0.5f, 1, 0, -1, 0, 0 },
+        { -0.5f, -0.5f, 0.5f, 1, 0, -1, 0, 0 },
+        { -0.5f, -0.5f,-0.5f, 0, 0, -1, 0, 0 },
+        { -0.5f,  0.5f,-0.5f, 0, 1, -1, 0, 0 },
         
         // Right
-        {  0.5f,  0.5f, 0.5f, 0, 1 },
-        {  0.5f,  0.5f,-0.5f, 1, 1 },
-        {  0.5f, -0.5f,-0.5f, 1, 0 },
-        {  0.5f, -0.5f,-0.5f, 1, 0 },
-        {  0.5f, -0.5f, 0.5f, 0, 0 },
-        {  0.5f,  0.5f, 0.5f, 0, 1 },
+        {  0.5f,  0.5f, 0.5f, 0, 1, 1, 0, 0 },
+        {  0.5f,  0.5f,-0.5f, 1, 1, 1, 0, 0 },
+        {  0.5f, -0.5f,-0.5f, 1, 0, 1, 0, 0 },
+        {  0.5f, -0.5f,-0.5f, 1, 0, 1, 0, 0 },
+        {  0.5f, -0.5f, 0.5f, 0, 0, 1, 0, 0 },
+        {  0.5f,  0.5f, 0.5f, 0, 1, 1, 0, 0 },
         /*
         // Top
         { -0.5f,  0.5f, 0.5f, 0, 0 },
@@ -84,25 +85,10 @@ namespace wolf {
         vertexDeclaration = new wolf::VertexDeclaration();
         vertexDeclaration->Begin();
         vertexDeclaration->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
-        //vertexDeclaration->AppendAttribute(wolf::AT_Color, 4, wolf::CT_UByte);
         vertexDeclaration->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
+        vertexDeclaration->AppendAttribute(wolf::AT_Normal, 3, wolf::CT_Float);
         vertexDeclaration->SetVertexBuffer(vertexBuffer);
         vertexDeclaration->End();
-        
-        /*
-        // Handle texture
-        glGenTextures(1, &tex);
-        glBindTexture(GL_TEXTURE_2D, tex);
-        
-        GLFWimage img;
-        glfwReadImage( "data/week11/building1.tga", &img, 0 );
-        glTexImage2D(GL_TEXTURE_2D, 0, img.Format, img.Width, img.Height, 0, img.Format, GL_UNSIGNED_BYTE, img.Data);
-        glfwFreeImage(&img);
-        
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        */
-        //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
         
         for (int i = 0; i < 8; i++) {
             //std::string s = string(itoa(i));
@@ -110,13 +96,9 @@ namespace wolf {
             char buffer [50];
             char char_texture = i + '0';
             sprintf (buffer, "data/week11/textures/building/%c.tga", char_texture);
-            
-            //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
+
             wallTexture[i] = wolf::TextureManager::CreateTexture(buffer);
         }
-        
-        
-        //g_pTexture->SetWrapMode(wolf::Texture::WM_Repeat, wolf::Texture::WM_Repeat);
         
         // Initialize matrices values
         translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
@@ -159,68 +141,71 @@ namespace wolf {
         numberOfFloors = _numberOfFloors;
     }
     
-    void Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position, short _roofTexture)
+    void Building::Build(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position, short _roofTexture, float _sun[2])
     {
         
         roof->SetTexture(_roofTexture);
         // Add the building
         for (float i = 0; i < numberOfFloors; i++) {
             this->SetPosition(glm::vec3(_position.x, i, _position.z));
-            this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         }
         roof->SetPosition(glm::vec3(_position.x, numberOfFloors, _position.z));
-        roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+        roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         
         // Add a building to the south
         if (type == 1 || type == 3 || type == 4 ||  type == 6 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
             }
             
             roof->SetPosition(glm::vec3(_position.x, numberOfFloors, _position.z+1.0f));
-            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         }
         
         // Add a building to the east
         if (type == 2 || type == 4 || type == 5 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
             }
             
             roof->SetPosition(glm::vec3(_position.x+1.0f, numberOfFloors, _position.z));
-            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         }
         
         // Add a building to the southeast
         if (type == 5 || type == 7) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x+1.0f, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
             }
             
             roof->SetPosition(glm::vec3(_position.x+1.0f, numberOfFloors, _position.z+1.0f));
-            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         }
         
         // Add a building to the southwest
         if (type == 6) {
             for (float i = 0; i < numberOfFloors; i++) {
                 this->SetPosition(glm::vec3(_position.x-1.0f, i, _position.z+1.0f));
-                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+                this->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
             }
             
             roof->SetPosition(glm::vec3(_position.x-1.0f, numberOfFloors, _position.z+1.0f));
-            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix);
+            roof->Render(program, _projectionMatrix, _viewMatrix, _worldMatrix, _sun);
         }
     }
-    void Building::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix)
+    void Building::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, float _sun[2])
     {
         projectionMatrix = _projectionMatrix;
         viewMatrix = _viewMatrix;
         worldMatrix = translationMatrix * scaleMatrix * rotationMatrix;
-        
+
+        glm::mat3 mWorldIT(worldMatrix);
+        mWorldIT = glm::inverse(mWorldIT);
+        mWorldIT = glm::transpose(mWorldIT);
         
         // Use shader program.
         program->Bind();
@@ -232,7 +217,13 @@ namespace wolf {
         program->SetUniform("projection", *projectionMatrix);
         program->SetUniform("view", *viewMatrix);
         program->SetUniform("world", worldMatrix);
+        program->SetUniform("WorldIT", mWorldIT);
+        
         program->SetUniform("texture1", 0);
+        program->SetUniform("LightDir", -glm::vec3(_sun[0],0.0f,0.0f));
+        program->SetUniform("LightColor", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
+        program->SetUniform("AmbientLight", glm::vec4(0.3f, 0.3f, 0.3f, 1.0f));
+        
         // Set up source data
         vertexDeclaration->Bind();
         

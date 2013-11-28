@@ -14,57 +14,18 @@ namespace wolf {
     {
         GLfloat x,y,z;
         GLfloat u,v;
+        GLfloat nx, ny, nz;
     };
     
     static const Vertex cubeVertices[] = {
-        /*
-         // Front
-         { -0.5f, -0.5f, 0.5f, 0, 0 },
-         { -0.5f,  0.5f, 0.5f, 0, 1 },
-         {  0.5f,  0.5f, 0.5f, 1, 1 },
-         {  0.5f,  0.5f, 0.5f, 1, 1 },
-         {  0.5f, -0.5f, 0.5f, 1, 0 },
-         { -0.5f, -0.5f, 0.5f, 0, 0 },
-         
-         // Back
-         {  0.5f,  0.5f,-0.5f, 1, 1 },
-         { -0.5f,  0.5f,-0.5f, 0, 1 },
-         { -0.5f, -0.5f,-0.5f, 0, 0 },
-         { -0.5f, -0.5f,-0.5f, 0, 0 },
-         {  0.5f, -0.5f,-0.5f, 1, 0 },
-         {  0.5f,  0.5f,-0.5f, 1, 1 },
-         
-         // Left
-         { -0.5f,  0.5f,-0.5f, 0, 1 },
-         { -0.5f,  0.5f, 0.5f, 1, 1 },
-         { -0.5f, -0.5f, 0.5f, 1, 0 },
-         { -0.5f, -0.5f, 0.5f, 1, 0 },
-         { -0.5f, -0.5f,-0.5f, 0, 0 },
-         { -0.5f,  0.5f,-0.5f, 0, 1 },
-         
-         // Right
-         {  0.5f,  0.5f, 0.5f, 0, 1 },
-         {  0.5f,  0.5f,-0.5f, 1, 1 },
-         {  0.5f, -0.5f,-0.5f, 1, 0 },
-         {  0.5f, -0.5f,-0.5f, 1, 0 },
-         {  0.5f, -0.5f, 0.5f, 0, 0 },
-         {  0.5f,  0.5f, 0.5f, 0, 1 },
-         
-         // Top
-         { -0.5f,  0.5f, 0.5f, 0, 0 },
-         { -0.5f,  0.5f,-0.5f, 0, 1 },
-         {  0.5f,  0.5f,-0.5f, 1, 1 },
-         {  0.5f,  0.5f,-0.5f, 1, 1 },
-         {  0.5f,  0.5f, 0.5f, 1, 0 },
-         { -0.5f,  0.5f, 0.5f, 0, 0 },
-         */
+        
         // Bottom
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
-        {  0.5f, -0.5f, 0.5f, 1, 0 },
-        {  0.5f, -0.5f,-0.5f, 1, 1 },
-        {  0.5f, -0.5f,-0.5f, 1, 1 },
-        { -0.5f, -0.5f,-0.5f, 0, 1 },
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
+        { -0.5f, -0.5f, 0.5f, 0, 0, 0, -1, 0  },
+        {  0.5f, -0.5f, 0.5f, 1, 0, 0, -1, 0  },
+        {  0.5f, -0.5f,-0.5f, 1, 1, 0, -1, 0  },
+        {  0.5f, -0.5f,-0.5f, 1, 1, 0, -1, 0  },
+        { -0.5f, -0.5f,-0.5f, 0, 1, 0, -1, 0  },
+        { -0.5f, -0.5f, 0.5f, 0, 0, 0, -1, 0  },
     };
     //static GLuint tex;
     #define ROOF_TEXTURE_SIZE 3
@@ -84,6 +45,7 @@ namespace wolf {
         vertexDeclaration->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
         //vertexDeclaration->AppendAttribute(wolf::AT_Color, 4, wolf::CT_UByte);
         vertexDeclaration->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
+        vertexDeclaration->AppendAttribute(wolf::AT_Normal, 3, wolf::CT_Float);
         vertexDeclaration->SetVertexBuffer(vertexBuffer);
         vertexDeclaration->End();
         
@@ -146,12 +108,14 @@ namespace wolf {
         type = _type;
     }
     
-    void Roof::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix)
+    void Roof::Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, float _sun[2])
     {
         projectionMatrix = _projectionMatrix;
         viewMatrix = _viewMatrix;
         worldMatrix = translationMatrix * scaleMatrix * rotationMatrix;
-        
+        glm::mat3 mWorldIT(worldMatrix);
+        mWorldIT = glm::inverse(mWorldIT);
+        mWorldIT = glm::transpose(mWorldIT);
         
         // Use shader program.
         program->Bind();
@@ -163,7 +127,13 @@ namespace wolf {
         program->SetUniform("projection", *projectionMatrix);
         program->SetUniform("view", *viewMatrix);
         program->SetUniform("world", worldMatrix);
+        program->SetUniform("WorldIT", mWorldIT);
+        //printf("sunroof %f\n", _sun[1]);
         program->SetUniform("texture1", 0);
+        program->SetUniform("LightDir", -glm::vec3(_sun[0],_sun[1], 0.0f));
+        program->SetUniform("LightColor", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
+        program->SetUniform("AmbientLight", glm::vec4(0.3f, 0.3f, 0.3f, 1.0f));
+
         // Set up source data
         vertexDeclaration->Bind();
         

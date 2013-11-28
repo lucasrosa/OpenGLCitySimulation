@@ -9,6 +9,13 @@
 #ifndef __week11__W_Building__
 #define __week11__W_Building__
 
+#define GLFW_INCLUDE_GL3
+#define GLFW_NO_GLU
+#include <stdio.h>
+#include <stdlib.h>
+#ifndef __APPLE__
+#include <GL/glew.h>
+#endif
 
 #include <iostream>
 #include "W_VertexBuffer.h"
@@ -37,9 +44,9 @@ namespace wolf
         //Building(glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix);
         Building();
         // Draw the building in the screen
-        void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix);
+        void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix, float _sun[2]);
         // Building the building
-        void Build (wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position, short _roofTexture);
+        void Build (wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 _worldMatrix, const glm::vec3& _position, short _roofTexture, float _sun[2]);
 		void SetPosition(const glm::vec3& position);
         glm::mat4 GetPosition();
         
@@ -73,12 +80,12 @@ namespace wolf
         glm::mat4 scaleMatrix;
         glm::mat4 rotationMatrix;
         
+        
         // Building parameters
         short texture;
         short type;
         short numberOfFloors;
 		//-------------------------------------------------------------------------
-        
     };
     
 }
