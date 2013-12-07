@@ -54,16 +54,7 @@ int main( void )
     // Enable vertical sync (on cards that support it)
     glfwSwapInterval( 1 );
     
-	switch( g_iExample )
-	{
-        case 0: InitAssignment2(); break;
-		case 1: InitExample1(); break;
-		case 2: InitExample2(); break;
-		case 3: InitExample3(); break;
-		case 4: InitExample4(); break;
-		case 5: InitExample5(); break;
-		case 6: InitExample6(); break;
-	}
+    InitAssignment2();
 
     do
     {
@@ -83,16 +74,8 @@ int main( void )
         glClearColor( 0.4f, 0.4f, 0.4f, 0.0f );
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         
-		switch( g_iExample )
-		{
-			case 0: RenderAssignment2(); break;
-            case 1: RenderExample1(); break;
-			case 2: RenderExample2(); break;
-			case 3: RenderExample3(); break;
-			case 4: RenderExample4(); break;
-			case 5: RenderExample5(); break;
-			case 6: RenderExample6(); break;
-		}
+        RenderAssignment2();
+        
 
         // Swap buffers
         glfwSwapBuffers();

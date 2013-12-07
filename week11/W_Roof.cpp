@@ -49,34 +49,14 @@ namespace wolf {
         vertexDeclaration->SetVertexBuffer(vertexBuffer);
         vertexDeclaration->End();
         
-        /*
-         // Handle texture
-         glGenTextures(1, &tex);
-         glBindTexture(GL_TEXTURE_2D, tex);
-         
-         GLFWimage img;
-         glfwReadImage( "data/week11/building1.tga", &img, 0 );
-         glTexImage2D(GL_TEXTURE_2D, 0, img.Format, img.Width, img.Height, 0, img.Format, GL_UNSIGNED_BYTE, img.Data);
-         glfwFreeImage(&img);
-         
-         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-         */
-        //wolf::Texture* pTex = wolf::TextureManager::CreateTexture("data/week11/building1.tga");
-        // TODO: MAKE AN ARRAY
+    
         for (int i = 0; i < ROOF_TEXTURE_SIZE; i++) {
-            //std::string s = string(itoa(i));
-            //std::string textureName = std::string("data/week11/building/") + std::string(texture);
             char buffer [50];
             char char_texture = i + '0';
             sprintf (buffer, "data/week11/textures/roof/%c.tga", char_texture);
             
-            //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
             roofTexture[i] = wolf::TextureManager::CreateTexture(buffer);
         }
-        
-        
-        //g_pTexture->SetWrapMode(wolf::Texture::WM_Repeat, wolf::Texture::WM_Repeat);
         
         // Initialize matrices values
         translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));

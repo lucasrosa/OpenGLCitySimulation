@@ -49,29 +49,13 @@ namespace wolf {
         {  0.5f, -0.5f,-0.5f, 1, 0, 1, 0, 0 },
         {  0.5f, -0.5f, 0.5f, 0, 0, 1, 0, 0 },
         {  0.5f,  0.5f, 0.5f, 0, 1, 1, 0, 0 },
-        /*
-        // Top
-        { -0.5f,  0.5f, 0.5f, 0, 0 },
-        { -0.5f,  0.5f,-0.5f, 0, 1 },
-        {  0.5f,  0.5f,-0.5f, 1, 1 },
-        {  0.5f,  0.5f,-0.5f, 1, 1 },
-        {  0.5f,  0.5f, 0.5f, 1, 0 },
-        { -0.5f,  0.5f, 0.5f, 0, 0 },
         
-        // Bottom
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
-        {  0.5f, -0.5f, 0.5f, 1, 0 },
-        {  0.5f, -0.5f,-0.5f, 1, 1 },
-        {  0.5f, -0.5f,-0.5f, 1, 1 },
-        { -0.5f, -0.5f,-0.5f, 0, 1 },
-        { -0.5f, -0.5f, 0.5f, 0, 0 },
-         */
     };
-    //static GLuint tex;
+
     static wolf::Texture* wallTexture[8];
     // Define the roof of the building
     static wolf::Roof* roof = 0;
-    static int numberOfRoofTextures = 2;
+    
     //----------------------------------------------------------
     // Constructor
     //----------------------------------------------------------
@@ -91,8 +75,6 @@ namespace wolf {
         vertexDeclaration->End();
         
         for (int i = 0; i < 8; i++) {
-            //std::string s = string(itoa(i));
-            //std::string textureName = std::string("data/week11/building/") + std::string(texture);
             char buffer [50];
             char char_texture = i + '0';
             sprintf (buffer, "data/week11/textures/building/%c.tga", char_texture);

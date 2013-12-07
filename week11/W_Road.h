@@ -32,7 +32,6 @@ namespace wolf
 		//-------------------------------------------------------------------------
 		// PUBLIC INTERFACE
 		//-------------------------------------------------------------------------
-        //Road(glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix);
         Road();
         // Draw the ceiling in the screen
         void Render(wolf::Program* program, glm::mat4* _projectionMatrix, glm::mat4* _viewMatrix, glm::mat4 worldMatrix, float _sun[2]);

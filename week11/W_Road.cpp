@@ -48,13 +48,9 @@ namespace wolf {
         vertexDeclaration->End();
         
         for (int i = 0; i < ROAD_TEXTURE_SIZE; i++) {
-            //std::string s = string(itoa(i));
-            //std::string textureName = std::string("data/week11/building/") + std::string(texture);
             char buffer [50];
             char char_texture = i + '0';
             sprintf (buffer, "data/week11/textures/road/%c.tga", char_texture);
-            
-            //wallTexture[i] = wolf::TextureManager::CreateTexture(sprintf("data/week11/building/%hd.tga", texture));
             roadTexture[i] = wolf::TextureManager::CreateTexture(buffer);
         }
         

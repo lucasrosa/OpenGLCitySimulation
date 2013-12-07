@@ -11,18 +11,12 @@
 		1C1CC0151834487E00B6F641 /* W_Building.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C1CC0131834487E00B6F641 /* W_Building.cpp */; };
 		1CBE0002183C6D5E00B7738C /* W_Road.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CBE0000183C6D5E00B7738C /* W_Road.cpp */; };
 		1CBEFFFF183C60A500B7738C /* W_Roof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CBEFFFD183C60A500B7738C /* W_Roof.cpp */; };
-		E143211B15FD68C900813DB6 /* example2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143211A15FD68C900813DB6 /* example2.cpp */; };
-		E143211D15FD6B5800813DB6 /* example3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143211C15FD6B5800813DB6 /* example3.cpp */; };
-		E143211F15FD831300813DB6 /* example4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143211E15FD831300813DB6 /* example4.cpp */; };
-		E143212115FD89A600813DB6 /* example5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143212015FD89A600813DB6 /* example5.cpp */; };
-		E143212315FD8CB100813DB6 /* example6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143212215FD8CB100813DB6 /* example6.cpp */; };
 		E14BDC8415C5F4A800EBDCCE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDC8315C5F4A800EBDCCE /* main.cpp */; };
 		E14BDC8D15C5F66900EBDCCE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14BDC8C15C5F66900EBDCCE /* OpenGL.framework */; };
 		E14BDC8F15C5F68000EBDCCE /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14BDC8E15C5F68000EBDCCE /* Quartz.framework */; };
 		E14BDC9115C5F69500EBDCCE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14BDC9015C5F69500EBDCCE /* Cocoa.framework */; };
 		E14BDC9515C5F6BF00EBDCCE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14BDC9415C5F6BF00EBDCCE /* IOKit.framework */; };
 		E14BDCA715C6C95300EBDCCE /* W_Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDCA415C6C95300EBDCCE /* W_Common.cpp */; };
-		E14BDCAB15C8389700EBDCCE /* example1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDCA815C8389700EBDCCE /* example1.cpp */; };
 		E14BDCDD15D0AF4D00EBDCCE /* W_Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDCD315D0AF4D00EBDCCE /* W_Buffer.cpp */; };
 		E14BDCDE15D0AF4D00EBDCCE /* W_IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDCD515D0AF4D00EBDCCE /* W_IndexBuffer.cpp */; };
 		E14BDCDF15D0AF4D00EBDCCE /* W_Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E14BDCD715D0AF4D00EBDCCE /* W_Program.cpp */; };
@@ -75,11 +69,6 @@
 		1CBE0001183C6D5E00B7738C /* W_Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Road.h; sourceTree = "<group>"; };
 		1CBEFFFD183C60A500B7738C /* W_Roof.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Roof.cpp; sourceTree = "<group>"; };
 		1CBEFFFE183C60A500B7738C /* W_Roof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Roof.h; sourceTree = "<group>"; };
-		E143211A15FD68C900813DB6 /* example2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example2.cpp; sourceTree = "<group>"; };
-		E143211C15FD6B5800813DB6 /* example3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example3.cpp; sourceTree = "<group>"; };
-		E143211E15FD831300813DB6 /* example4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example4.cpp; sourceTree = "<group>"; };
-		E143212015FD89A600813DB6 /* example5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example5.cpp; sourceTree = "<group>"; };
-		E143212215FD8CB100813DB6 /* example6.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example6.cpp; sourceTree = "<group>"; };
 		E14BDC7F15C5F4A800EBDCCE /* week11 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = week11; sourceTree = BUILT_PRODUCTS_DIR; };
 		E14BDC8315C5F4A800EBDCCE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E14BDC8C15C5F66900EBDCCE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -90,7 +79,6 @@
 		E14BDCA415C6C95300EBDCCE /* W_Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Common.cpp; sourceTree = "<group>"; };
 		E14BDCA515C6C95300EBDCCE /* W_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Common.h; sourceTree = "<group>"; };
 		E14BDCA615C6C95300EBDCCE /* W_Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Types.h; sourceTree = "<group>"; };
-		E14BDCA815C8389700EBDCCE /* example1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example1.cpp; sourceTree = "<group>"; };
 		E14BDCAA15C8389700EBDCCE /* examples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = examples.h; sourceTree = "<group>"; };
 		E14BDCD315D0AF4D00EBDCCE /* W_Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = W_Buffer.cpp; sourceTree = "<group>"; };
 		E14BDCD415D0AF4D00EBDCCE /* W_Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W_Buffer.h; sourceTree = "<group>"; };
@@ -198,12 +186,6 @@
 		E14BDC8215C5F4A800EBDCCE /* week11 */ = {
 			isa = PBXGroup;
 			children = (
-				E14BDCA815C8389700EBDCCE /* example1.cpp */,
-				E143211A15FD68C900813DB6 /* example2.cpp */,
-				E143211C15FD6B5800813DB6 /* example3.cpp */,
-				E143211E15FD831300813DB6 /* example4.cpp */,
-				E143212015FD89A600813DB6 /* example5.cpp */,
-				E143212215FD8CB100813DB6 /* example6.cpp */,
 				1C1CC0101834087100B6F641 /* assignment2.cpp */,
 				1CBE0000183C6D5E00B7738C /* W_Road.cpp */,
 				1CBE0001183C6D5E00B7738C /* W_Road.h */,
@@ -367,7 +349,6 @@
 			files = (
 				E14BDC8415C5F4A800EBDCCE /* main.cpp in Sources */,
 				E14BDCA715C6C95300EBDCCE /* W_Common.cpp in Sources */,
-				E14BDCAB15C8389700EBDCCE /* example1.cpp in Sources */,
 				1C1CC0121834087100B6F641 /* assignment2.cpp in Sources */,
 				E14BDCDD15D0AF4D00EBDCCE /* W_Buffer.cpp in Sources */,
 				E14BDCDE15D0AF4D00EBDCCE /* W_IndexBuffer.cpp in Sources */,
@@ -402,11 +383,6 @@
 				E18E1D7D15F843FE00AE9BA3 /* PVRTVector.cpp in Sources */,
 				E18E1D7E15F843FE00AE9BA3 /* PVRTVertex.cpp in Sources */,
 				E18E1D9A15FC1B5800AE9BA3 /* W_Model.cpp in Sources */,
-				E143211B15FD68C900813DB6 /* example2.cpp in Sources */,
-				E143211D15FD6B5800813DB6 /* example3.cpp in Sources */,
-				E143211F15FD831300813DB6 /* example4.cpp in Sources */,
-				E143212115FD89A600813DB6 /* example5.cpp in Sources */,
-				E143212315FD8CB100813DB6 /* example6.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
