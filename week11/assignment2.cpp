@@ -198,7 +198,6 @@ void generateCityPlan() {
     printf("LOG: generateCityPlan() called.\n");
     // Clean the list that stores each building information
     buildingsInformation.clear();
-    //int *worstCaseBuildings = new int[(numberOfBlockLines*numberOfBlockColumns*4)];
     // initialize random seed
     srand ((int) time(NULL));
     
@@ -268,7 +267,6 @@ void generateCityPlan() {
                     default:
                         break;
                 }
-                //BuildBuilding(blockPosition, blockTypes[randomBlock].buildingTypes[building], positionInsideBlock = building, randomNumberOfFloors,randomTexture)
                 
                 buildingsInformation.push_back(thisBuilding);
                 //printf("Building %d  of block (%dx%d) has texture %d and %d floors.\n", building, line, column, randomTexture, randomNumberOfFloors);
@@ -309,8 +307,8 @@ GLfloat camZSpeed = 0.0f;
 
 
 // How fast we move (higher values mean we move and strafe faster)
-//GLfloat movementSpeedFactor = .125f;
-GLfloat movementSpeedFactor = .75;
+GLfloat movementSpeedFactor = .5f;
+//GLfloat movementSpeedFactor = .75;
 
 // Hoding any keys down?
 bool holdingForward     = false;
@@ -559,9 +557,7 @@ void InitAssignment2()
     // Set the mouse cursor to the centre of our window
     glfwSetMousePos(midWindowX, midWindowY);
     
-    // Instantiate the programs
-    //program       = wolf::ProgramManager::CreateProgram("data/week11/polyhedron.vsh", "data/week11/polyhedron.fsh");
-    //program         = wolf::ProgramManager::CreateProgram("data/week11/cube.vsh", "data/week11/cube.fsh");
+    // Instantiate the program
     buildingProgram         = wolf::ProgramManager::CreateProgram("data/week11/building.vsh", "data/week11/building.fsh");
     // Instantiate the Building
     building = new wolf::Building();
@@ -587,14 +583,14 @@ void InitAssignment2()
 void RenderAssignment2()
 {
     // Calculating the sun sun
-    sun[0] += 0.01f;
+    sun[0] += 0.0075f;
     if (sun[0]  >= 1.0f) {
         sun[0] = -1.0f;
     }
     if (sunReachedUp) {
-        sun[1] -= 0.01f;
+        sun[1] -= 0.0075f;
     } else {
-        sun[1] += 0.01f;
+        sun[1] += 0.0075f;
     }
     
     if (sun[1]  >= 1.0f) {
@@ -623,7 +619,6 @@ void RenderAssignment2()
     glm::mat4 Rx    = glm::rotate(T,  camXRot, glm::vec3(1.0f, 0.0f, 0.0f)); //glRotatef(rX,1,0,0);
     glm::mat4 V     = glm::rotate(Rx, camYRot, glm::vec3(0.0f, 1.0f, 0.0f)); //glRotatef(rY,0,1,0);
     V = V * glm::translate(glm::mat4(1.0f),glm::vec3(-camXPos, -camYPos, -camZPos));
-    // get obj matrix from object position
     
 	glm::mat4 projectionMatrix = glm::perspective(45.0f, windowWidth / windowHeight, 0.1f, 1000.0f);
 	glm::mat4 worldMatrix = glm::rotate(s_fRot, 0.0f, 1.0f, 0.0f);
@@ -632,17 +627,20 @@ void RenderAssignment2()
     
     
     std::list<buildingInformation>::iterator buildingsInformationIterator;
-    // Iterate through the buildings list
     
+    // Iterate through the buildings list
     for (buildingsInformationIterator = buildingsInformation.begin() ; buildingsInformationIterator != buildingsInformation.end(); buildingsInformationIterator++){
-        //building->SetPosition(glm::vec3((*buildingsInformationIterator).positionX, 0.0f, (*buildingsInformationIterator).positionZ));
+        // Sets building texture based on the list
         building->SetTexture((*buildingsInformationIterator).texture);
+        // Sets building type based on the list
         building->SetType((*buildingsInformationIterator).type);
+        // Sets building number of floors based on the list
         building->SetNumberOfFloors((*buildingsInformationIterator).numberOfFloors);
-        //building->Render(program, &projectionMatrix, &viewMatrix, worldMatrix);
         float x_position = (*buildingsInformationIterator).positionX;
         float z_position = (*buildingsInformationIterator).positionZ;
         short roofTexture = (*buildingsInformationIterator).roofTexture;
+        
+        // Asks the Building class to build the building passing the position, roof texture and Sun value
         building->Build(buildingProgram,
                         &projectionMatrix,
                         &viewMatrix,
@@ -660,9 +658,6 @@ void RenderAssignment2()
         float zPosition = (line)*3-1;
         for (int column = 0; column < numberOfBlockColumns * 3 + 2; column++) {
             float xPosition = column;
-            //printf("Road: %fx%f\n", zPosition, xPosition);
-            //printf("%f !=")
-            //float intersection = (column*3-1);
             if ((column+1) % 3 != 0) { // Intersection
                 road->SetTexture(0);
             } else {
